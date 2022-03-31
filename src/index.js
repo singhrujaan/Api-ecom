@@ -6,12 +6,19 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import { PersistGate } from 'redux-persist/integration/react'
+import {
+  persistStore,
+} from 'redux-persist'
 
+let persistor = persistStore(store)
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+      <PersistGate loading={null} persistor={persistor}>
+      <App />
+      </PersistGate>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

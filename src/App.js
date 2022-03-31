@@ -6,6 +6,8 @@ import Home from './components/Home';
 import Products from './components/Products';
 import { Routes, Route, Link } from "react-router-dom";
 import ProductsInfo from './components/ProductsInfo';
+import CartItems from './components/CartItems';
+import Slider from './components/Slider';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         {/* <Route path="/" element={<Home />} /> */}
         <Route path="/" element={<Products/>} />
         <Route path="products/:id" element={<ProductsInfo/>} />
+        <Route path="cart" element={<CartItems/>} />
+        <Route path="favItems" element={<Slider/>} />
       </Routes>
     </div>
   );

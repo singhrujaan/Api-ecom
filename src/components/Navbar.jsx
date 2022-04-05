@@ -1,10 +1,12 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 const Navbar = () => {
     const myCart = useSelector((state) => state.Ecom.cart)
-    console.log(myCart)
-    const navComponents =['Home','Categories','About'];
+    const navComponents =[
+       { name:'E-Com Store',link:'/'}
+
+    ];
 
   return (
     <div className='relative'>
@@ -12,14 +14,15 @@ const Navbar = () => {
         {
             navComponents.map((item,index)=>{
                 return(
-                    <div key={index} className='text-amber-100 font-semibold text-xl hover:text-stone-900 hover:cursor-pointer'>
-                        {item}
+                    <div key={index} className='text-amber-100 font-semibold text-3xl hover:text-cyan-900 hover:cursor-pointer'>
+                        <Link to={item.link}>{item.name}</Link>
                     </div>
                 )
             })
         }
     </div>
-        <span className='absolute top-7 text-2xl text-white font-semibold right-32'>cart({myCart})</span>
+        <Link to='/cart'><span className='absolute top-7 text-2xl text-white font-semibold right-72'>Go to Cart</span></Link>
+        <span className='absolute top-7 text-2xl text-white font-semibold right-32'>cart({myCart.length})</span>
     </div>
   )
 }

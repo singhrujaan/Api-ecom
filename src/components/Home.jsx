@@ -3,9 +3,7 @@ import Products from './Products'
 
 const Home = () => {
     const categories = ["All","Men's Clothing","Women's Cothing", "Jewellery","Electronics"];
-    // const handleClick = (item) =>{
-    //     const result = 
-    // }
+    
   return (
       <div>
     <div className='flex space-x-10 mt-10 justify-center'>

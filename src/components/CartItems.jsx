@@ -11,48 +11,33 @@ const CartItems = () => {
   const [search, setSearch] = useState("");
   const items = useSelector((state) => state.Ecom.cart);
   const [filteredCart, setFilteredCart] = useState(items);
+  const [totalSum, setTotalSum] = useState(0);
   // const[count,setCount]=useState(0)
   // const [counter, setCounter] = useState(1);
-console.log('items12345',items)
+  useEffect(() => {
+    let sum = 0;
+    items.map((item)=>{
+      sum= sum+item.price*item.qty
+    })
+    setTotalSum(sum)
+  }, [items,totalSum])
+  
   const totalCart = items.map((item)=>{
-    console.log("birthday",item.totalPrice)
     let count = 0
     return(
       count+=item.totalPrice
     )
   })
-  console.log(totalCart,"ourtotalcart")
   let sum = 0;
   for (let num of totalCart){
     sum=sum+num;
   }
-  console.log("sum",sum)
   
-    
-  
-  // useEffect(() => {
-    
-  //   const mysum =()=>{
-  //     const value = items.map((item)=>{
-  //       let mysum=0;
-  //      return(mysum += item.price)
-  //      // console.log(value,"finalsum")
-  //     })
-  //     setCount(value)
-  //     console.log(value,"value")
-  //   }
-  //   mysum();
-  // }, [count])
-      
-
-  
-
 
   
   const handleDelete = (id) => {
     dispatch(deleteCart(id));
   };
-  console.log("filter",filteredCart);
 
 
 
@@ -118,7 +103,7 @@ console.log('items12345',items)
                     <div className="text-xl">price: {item.price} $</div>
                     <div className="text-xl">
                       Total price: {item.price} X {item.qty} ={" "}
-                      {item.price * item.qty} 
+                      {item.price * item.qty} $
                       {/* {item.totalPrice} */}
                     </div>
                   </div>
@@ -135,13 +120,14 @@ console.log('items12345',items)
             </div>
           );
         })
+        
       ) : (
         <div className="font-bold text-3xl flex justify-center items-center mt-32">
           No items found on the Cart
         </div>
       )}
       <span className="text-5xl font-semibold "> 
-      Total Price:&nbsp;{sum} $
+      Total Price:&nbsp;{totalSum} $
       </span>
     </div>
   );

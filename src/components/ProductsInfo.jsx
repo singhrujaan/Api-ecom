@@ -33,7 +33,6 @@ const ProductsInfo = () => {
           return response2;
         })
         .catch((error) => {
-          console.log(error);
         });
       setLoading(false);
 
@@ -41,7 +40,6 @@ const ProductsInfo = () => {
     };
     Info();
   }, []);
-  console.log("infropdt", InfoProduct);
 
   return (
     <div>

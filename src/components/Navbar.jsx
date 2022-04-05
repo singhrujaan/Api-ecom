@@ -3,14 +3,10 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 const Navbar = () => {
     const myCart = useSelector((state) => state.Ecom.cart)
-    console.log("mycart",myCart)
     const navComponents =[
-       { name:'Home',link:'/'},
-       { name:'Categories',link:'/'},
-       { name:'About',link:'/'},
+       { name:'E-Com Store',link:'/'}
 
     ];
-    console.log(navComponents,myCart,'mynavandcart')
 
   return (
     <div className='relative'>
@@ -18,7 +14,7 @@ const Navbar = () => {
         {
             navComponents.map((item,index)=>{
                 return(
-                    <div key={index} className='text-amber-100 font-semibold text-xl hover:text-stone-900 hover:cursor-pointer'>
+                    <div key={index} className='text-amber-100 font-semibold text-3xl hover:text-cyan-900 hover:cursor-pointer'>
                         <Link to={item.link}>{item.name}</Link>
                     </div>
                 )

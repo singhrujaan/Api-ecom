@@ -6,7 +6,6 @@ const Footer = () => {
   const [footer, setFooter] = useState(true);
 
   const myFavitems = useSelector((state) => state.Fav.favItems);
-  console.log("fav1212",myFavitems)
   return (
     <div className="bg-slate-200 text-orange-800 h-auto">
       <h1 className="text-orange-700 font-semibold text-4xl pt-10 ">

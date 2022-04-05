@@ -12,11 +12,18 @@ const ProductCard = ({ item,footer }) => {
 
   const [iconClicked, setIconClicked] = useState(false);
   const dispatch = useDispatch();
-console.log("favouritetoy",favItems);
 
 useEffect(()=>{
-  console.log("favguy",favItems);
-  
+  favItems.map((value)=>{
+    if (value.id===item.id){
+      if(value.isFav){
+        setIconClicked(true)
+      }
+      else{
+        setIconClicked(false)
+      }
+    }
+  })
 
 },[])
 
@@ -24,17 +31,14 @@ useEffect(()=>{
   const handleIconClick=(item)=>{
     
     const exist = favItems.some(element=>element.id == item.id);
-    console.log("exist",favItems,iconClicked,item);
  
     if (!exist){
-       console.log("clicked");
  
       dispatch(favourites(item));
     
  
     }else{
  
-      console.log("unclicked");
     
       dispatch(deleteFavourites(item))
     }

@@ -11,11 +11,13 @@ export const FavSlice = createSlice({
   initialState,
   reducers: {
     favourites:(state,action)=>{
-        state.favItems=[...state.favItems,action.payload];
+        state.favItems=[...state.favItems,{...action.payload,isFav:"true"}];
         localStorage.setItem('fav Items',state.favItems)
     },
     deleteFavourites:(state,action)=>{
         // console.log("deletefav",action.payload)
+        state.favItems = [...state.favItems,{...action.payload,isFav:false}]
+        // state.favItems= state.favItems.filter((item)=>item.fav===true)
         state.favItems= state.favItems.filter((item)=>item.id !== action.payload.id)
     }
   }

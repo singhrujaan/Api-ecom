@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect,useState } from 'react';
 import ProductCard from './ProductCard';
-import {  useDispatch } from "react-redux";
+import {  useDispatch,useSelector } from "react-redux";
 import { storeProducts } from "../features/EcomSlice";
 import Footer from './Footer';
 
@@ -12,8 +12,11 @@ const Products = () => {
     const [filteredData, setFilteredData] = useState(data)
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
+
+
+
     const filterHandler = (item)=>{
-        if (filteredData.length>0){
+        if (filteredData && filteredData.length>0){
             if(item!== "All"){     const result =  data.filter((value)=>value.category===item);
                 setFilteredData(result)
                 console.log("saad",result,item,data); }
@@ -23,6 +26,9 @@ const Products = () => {
    
     }
     }
+    useEffect(()=>{
+
+    },[])
 
 
     
@@ -67,7 +73,7 @@ const Products = () => {
                  {console.log("index2",item,index)}
             return(
                 <div  key={index}>
-                    <ProductCard item={item}/>
+                    <ProductCard item={item} />
                 </div>    
             )
         })}

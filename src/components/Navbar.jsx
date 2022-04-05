@@ -10,6 +10,7 @@ const Navbar = () => {
        { name:'About',link:'/'},
 
     ];
+    console.log(navComponents,myCart,'mynavandcart')
 
   return (
     <div className='relative'>

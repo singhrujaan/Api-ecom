@@ -21,28 +21,45 @@ export const EcomSlice = createSlice({
     countCart: (state, {
       payload
     }) => {
-      state.cart = [...state.cart, payload];
+      console.log("pay",payload.id)
+     
+      // if(state.cart.some(item=>item.id===payload.id)){
+      //   state.cart = state.cart.map(item => item.id === payload.id ?
+      //     { ...item, qty: 1}
+      //     : item)
+      // }
+       state.cart = [...state.cart, { ...payload, qty: 1, totalPrice:state.cart.price*1}];
+        
+        
       console.log(state.cart, "state of cart")
       localStorage.setItem('Items in Cart', state.cart)
     },
     deleteCart: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload);
     },
-    qtyCart: (state, action) => {
-      console.log("stater",action.payload)
-    //   let qty = 1;
-
-    //   state.cart = state.cart.splice(action.payload, 1, 
-    //  "hello"
-    //   )
-    //    console.log("state",state.cart)
-      // const exist = state.cart.find((element)=>element.id === action.payload)
-      // if(exist){
-      //   state.cart = [...state.cart,{...state.cart,qty:state.cart.qty+1}]
-
+    qtyAddCart: (state, action) => {
+      // const item = state.cart.filter((item)=>item === action.payload)
+      if (state.cart.some(item => item.id === action.payload.id)) {
+        state.cart = state.cart.map(item => item.id === action.payload.id ?
+          { ...item, qty: item.qty + 1,totalPrice:item.price*(item.qty) }
+          : item)
+        }
+        console.log("myitemsincart",state.cart)
+      },
+      qtyMinusCart: (state, action) => {
+        // const item = state.cart.filter((item)=>item === action.payload)
+        
+        if (state.cart.some(item => item.id === action.payload.id)) {
+          state.cart = state.cart.map(item => item.id === action.payload.id && item.qty>1? 
+            { ...item, qty: item.qty - 1,totalPrice:item.price*(item.qty) }
+            :item)
+          }
+          console.log("myitemsincart",state.cart)
+      // if (state.cart.some(item => item.id === action.payload.id)) {
+      //  state.cart = state.cart.find((item)=>item.qty>0)  
       // }
-      // console.log(state.cart,'staeofcart')
     }
+
   }
 });
 
@@ -50,7 +67,8 @@ export const {
   countCart,
   storeProducts,
   deleteCart,
-  qtyCart
+  qtyAddCart,
+  qtyMinusCart
 } = EcomSlice.actions;
 
 

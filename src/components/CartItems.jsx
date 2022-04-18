@@ -5,8 +5,10 @@ import { deleteCart } from "../features/EcomSlice";
 import { BiPlusMedical } from "react-icons/bi";
 import { TiMinus } from "react-icons/ti";
 import { qtyAddCart,qtyMinusCart } from "../features/EcomSlice";
+import { useTranslation, initReactI18next, Trans } from "react-i18next";
 
 const CartItems = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const items = useSelector((state) => state.Ecom.cart);
@@ -73,7 +75,7 @@ const CartItems = () => {
         onChange={(e) => {
           setSearch(e.target.value);
         }}
-        placeholder="search items"
+        placeholder={t("searchItems")}
       />
       {(filteredCart.length>0 ) ? (
         filteredCart.map((item, index) => {
@@ -100,9 +102,9 @@ const CartItems = () => {
                   </div>
                   <div className="flex space-x-8">
                     {/* <div>rating: {item.rating.rate}</div> */}
-                    <div className="text-xl">price: {item.price} $</div>
+                    <div className="text-xl">{t("price")}: {item.price} $</div>
                     <div className="text-xl">
-                      Total price: {item.price} X {item.qty} ={" "}
+                    {t("totalPrice")}: {item.price} X {item.qty} ={" "}
                       {item.price * item.qty} $
                       {/* {item.totalPrice} */}
                     </div>
@@ -112,7 +114,7 @@ const CartItems = () => {
                       className="border-2 px-3 rounded-md bg-red-500 text-white font-semibold hover:bg-red-700 py-1"
                       onClick={() => handleDelete(item.id)}
                     >
-                      Delete From Cart
+                      {t("deleteFromCart")}
                     </button>
                   </div>
                 </div>
@@ -127,7 +129,7 @@ const CartItems = () => {
         </div>
       )}
       <span className="text-5xl font-semibold "> 
-      Total Price:&nbsp;{totalSum} $
+      {t("totalPrice")}:&nbsp;{totalSum} $
       </span>
     </div>
   );

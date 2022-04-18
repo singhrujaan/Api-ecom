@@ -4,9 +4,11 @@ import { IoMdHeart } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { favourites,deleteFavourites } from "../features/FavSlice";
 import { useSelector } from "react-redux";
+import { useTranslation, initReactI18next, Trans } from "react-i18next";
 
 const ProductCard = ({ item,footer }) => {
 
+  const { t } = useTranslation();
   const favItems = useSelector((state)=>state.Fav.favItems);
   const allProducts = useSelector((state)=>state.Ecom.allProducts);
 
@@ -68,7 +70,7 @@ useEffect(()=>{
           </button>
           <Link to={`products/${item.id}`}>
             <button className="border-2 mt-10 hover:bg-cyan-600 hover:text-white absolute bottom-10 ml-10 py-2 px-9">
-              Buy now
+              {t("buyNow")}
             </button>
           </Link>
         </div>

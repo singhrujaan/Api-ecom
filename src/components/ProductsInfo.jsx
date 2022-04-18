@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { countCart } from "../features/EcomSlice";
+import { useTranslation, initReactI18next, Trans } from "react-i18next";
+
 
 const ProductsInfo = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const [InfoProduct, setInfoProduct] = useState();
   const [disable, setDisable] = useState(false);
@@ -60,14 +63,14 @@ const ProductsInfo = () => {
                 <div className="text-5xl font-bold">{InfoProduct.title}</div>
                 <div>
                   <h1 className="text-3xl font-bold">
-                    category : {InfoProduct.category}
+                    {t("category")}: {InfoProduct.category}
                   </h1>
                 </div>
                 <div className="text-xl">{InfoProduct.description}</div>
                 <div className="flex justify-evenly">
-                  <div className="text-3xl">Price: {InfoProduct.price}$</div>
+                  <div className="text-3xl">{t("price")}: {InfoProduct.price}$</div>
                   <div className="text-3xl">
-                    Rating: {InfoProduct.rating.rate}
+                    {t("rating")}: {InfoProduct.rating.rate}
                   </div>
                 </div>
                 <button
@@ -75,7 +78,7 @@ const ProductsInfo = () => {
                   disabled={disable}
                   onClick={() => handleCart(InfoProduct)}
                 >
-                  Add to Cart
+                  {t("addtoCart")}
                 </button>
               </div>
               {toast  && (setTimeout(() => {
@@ -84,7 +87,7 @@ const ProductsInfo = () => {
               }, 5000))
                }
                {toast && <div className="h-auto w-1/6 right-1 py-5 px-5 bottom-1  bg-green-600 text-white fixed">
-                            item already on the cart
+                            {t("itemAlready")}
                                 </div>}
             </div>
           )}
